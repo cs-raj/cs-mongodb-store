@@ -40,7 +40,7 @@ jobs:
         with:
           node-version: '18.x'
       - name: Install dependencies
-        run: npm install
+        run: CXXFLAGS="--std=c++14" npm install
       - name: Download dist
         uses: actions/download-artifact@v3
         with:
