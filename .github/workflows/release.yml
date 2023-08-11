@@ -6,15 +6,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3.5.3
-      - uses: actions/setup-node@v3.7.0
+      - name: Checkout
+        uses: actions/checkout@v3.5.3
         with:
-          node-version: "18.x"
-      - name: Installing dependencies
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v3.7.0
+        with:
+          node-version: '18.x'
+      - name: Install dependencies
         run: npm install
       - name: Build
         run: npm run build-ts
-      - name: Publishing datasync content store mongodb
+      - name: Release
+        id: release-plugin
         uses: JS-DevTools/npm-publish@v2.2.0
         with:
           token: ${{ secrets.NPM_TOKEN }}
+      - name: github-release
+        id: github-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run:  gh release create v${{ steps.release-plugin.outputs.version }} --title "Release ${{ steps.release-plugin.outputs.version }}" --generate-notes
+
