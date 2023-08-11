@@ -1,7 +1,7 @@
 name: Release datasync content store mongodb
 on:
   push:
-    branches: [master]
+    branches: [main]
 jobs:
   build:
     runs-on: ubuntu-latest
