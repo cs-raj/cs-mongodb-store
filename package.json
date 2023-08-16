@@ -3,6 +3,7 @@
   "author": "Contentstack Ecosystem <ecosystem@contentstack.com>",
   "version": "1.0.4",
   "description": "Contentstack datasync's mongodb library. Helps to store contents in mongodb",
+  "main": "dist/index.js",
   "dependencies": {
     "debug": "^4.3.4",
     "lodash": "^4.17.20",
